@@ -486,6 +486,9 @@ int main(int argc, char *argv[])
         qputenv("QTWEBENGINE_CHROMIUM_FLAGS", current_flags.toUtf8());
     }
 
+    // disable thread unsafe use of broken PCRE2 JIT (version 10.43) in QRegularExpression
+    qputenv("QT_ENABLE_REGEXP_JIT","0");
+
     MainApplication app(argc, argv);
 
 #ifdef Q_OS_MAC
@@ -649,11 +652,7 @@ int main(int argc, char *argv[])
             QString hcolor = app.palette().color(QPalette::Highlight).name();
             QString user_color = Utility::GetEnvironmentVar("SIGIL_FOCUS_HIGHLIGHT_COLOR");
             if (!user_color.isEmpty() && user_color.startsWith("#") && user_color.length() == 7) {
-#if QT_VERSION >= QT_VERSION_CHECK(6,4,0)
                 if (QColor::isValidColorName(user_color)) {
-#else
-                if (QColor::isValidColor(user_color)) {
-#endif
                     hcolor = user_color;
                 }
             }

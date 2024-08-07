@@ -102,6 +102,7 @@ public:
     
     QString GetSearchRegex();
     QString GetReplace();
+    QString GetFind();
     QList<Resource*> GetAllResourcesToSearch();
     void EmitOpenFileRequest(const QString& bookpath, int line, int pos);
                                                                         
@@ -223,8 +224,6 @@ private slots:
 
     void ClearHistory();
 
-    // void AdvancedOptionsClicked();
-
 private:
 
     void SetPreviousSearch();
@@ -238,8 +237,6 @@ private:
     bool ReplaceText(Searchable::Direction direction, bool replace_current = false);
 
     void SetCodeViewIfNeeded();
-
-    // void RestoreFRFocusIfNeeded(bool had_focus, bool force=false);
 
     // Displays a message to the user informing him
     // that his last search term could not be found.
@@ -320,8 +317,6 @@ private:
 
     // Writes all the stored dialog settings
     void WriteSettings();
-
-    // void ShowHideAdvancedOptions();
 
     // Set all F&R buttons to text-only
     // Default: icon-only
